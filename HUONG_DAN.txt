@@ -1,0 +1,21 @@
+BrightSpeakAI V14 • 14.0.0
+
+CHẠY TRÊN MÁY WINDOWS
+Giải nén toàn bộ vào một thư mục mới. Chạy START-BRIGHTSPEAK.bat với Python 3.11 hoặc 3.12 đã cài. Nếu cần Face-to-face, điền khóa riêng sau GEMINI_API_KEY= trong GEMINI_KEY.txt trên máy. Nếu chỉ thử đăng ký/đăng nhập, để trống và đóng Notepad. Dùng tab mà trình khởi động mở vì bản cũ có thể còn chạy trên cổng 8765. Kiểm tra /api/v1/system/health ở cùng địa chỉ, phiên bản phải là 14.0.0 và registration_mode là direct.
+
+Tạo tài khoản học sinh bằng email mới, xác nhận mật khẩu, chọn lớp, đánh dấu đồng ý rồi bấm Tạo tài khoản học sinh. V14 đưa học sinh vào trang học ngay. Email đã đăng ký thành công thì chọn Đăng nhập. Với tài khoản học sinh cũ đang chờ OTP, đăng ký lại bằng đúng email và mật khẩu ban đầu để tiếp tục.
+
+Tài khoản demo local (email / mật khẩu)
+Học sinh     student@demo.com / student123
+Giáo viên    teacher@demo.com / teacher123
+Quản trị     admin@demo.com / admin123
+
+Bản local lưu vào runtime/brightspeak.db trong thư mục đang chạy. Khởi động lần đầu tạo ba tài khoản mẫu. Nếu dùng lại dữ liệu cũ và mật khẩu demo đã đổi hoặc tài khoản mẫu đã khóa, chạy KHOI-PHUC-DEMO.bat sau khi cài xong. Công cụ chỉ khôi phục ba danh tính mẫu trên SQLite local, mở khóa và kết thúc các phiên đăng nhập cũ của chúng. Lịch sử luyện vẫn được giữ.
+
+ADMIN CLOUD
+Web service cũ có thể tiếp tục dùng tên brightspeakai-v13-demo. Đưa nội dung thư mục V14 lên gốc kho Git đã liên kết, giữ kết nối PostgreSQL hiện có. Trong Render → web service → Environment, đặt REGISTRATION_MODE=direct, APP_ENV=cloud, DEMO_OTP=false. Điền khóa Gemini riêng cho Face-to-face. Email gửi thư tùy chọn đối với đăng ký trực tiếp.
+Tài khoản demo mật khẩu công khai chỉ khởi tạo ở local. Cloud tạo admin lần đầu bằng BOOTSTRAP_ADMIN_EMAIL và BOOTSTRAP_ADMIN_PASSWORD (ít nhất 12 ký tự). Điền đúng email này ở màn hình Đăng nhập. Nếu email đã có trong DB, đổi biến môi trường không đổi mật khẩu đã lưu. Nếu email thuộc tài khoản học sinh, hãy dùng email quản trị riêng chưa đăng ký và triển khai lại.
+Để khôi phục admin hiện có, dùng “Quên mật khẩu?” nếu đã cấu hình gửi thư. Người vận hành có quyền shell của dịch vụ có thể chạy python -m scripts.recover_accounts admin rồi nhập email và mật khẩu mới theo lời nhắc. Công cụ chỉ thay mật khẩu của admin đang hoạt động. Khi bản deploy Live, kiểm tra /api/v1/system/health cho 14.0.0.
+
+THỬ FACE-TO-FACE
+Chọn chủ đề theo lớp, bấm Bắt đầu nói, cấp quyền mic, nghe Bibi nói hết rồi trả lời. Camera tùy chọn. Sau một lượt có phụ đề hoàn chỉnh, có thể bấm Nghe lại câu vừa rồi để nghe bằng giọng đọc tiếng Anh của thiết bị nếu trình duyệt hỗ trợ. Bấm Kết thúc để ngắt phiên.
